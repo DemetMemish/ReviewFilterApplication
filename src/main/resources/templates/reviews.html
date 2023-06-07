@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Reviews</title>
+</head>
+<body>
+<h1>Reviews</h1>
+<form action="#" th:action="@{/reviews}" th:object="${filterForm}" method="get">
+  <div>
+    <label for="orderByRating">Order by Rating:</label>
+    <select id="orderByRating" name="orderByRating" th:field="*{orderByRating}">
+      <option value="HighestFirst">Highest First</option>
+      <option value="LowestFirst">Lowest First</option>
+    </select>
+  </div>
+  <div>
+    <label for="minRating">Minimum Rating:</label>
+    <select id="minRating" name="minRating" th:field="*{minRating}">
+      <option value="5">5</option>
+      <option value="4">4</option>
+      <option value="3">3</option>
+      <option value="2">2</option>
+      <option value="1">1</option>
+    </select>
+  </div>
+  <div>
+    <label for="orderByDate">Order by Date:</label>
+    <select id="orderByDate" name="orderByDate" th:field="*{orderByDate}">
+      <option value="NewestFirst">Newest First</option>
+      <option value="OldestFirst">Oldest First</option>
+    </select>
+  </div>
+  <div>
+    <label for="prioritizeText">Prioritize by Text:</label>
+    <select id="prioritizeText" name="prioritizeText" th:field="*{prioritizeText}">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+  </div>
+  <button type="submit">Apply Filters</button>
+</form>
+
+<!-- Render the reviews table -->
+<table>
+  <thead>
+  <tr>
+    <th>Review ID</th>
+    <th>Review Text</th>
+    <th>Rating</th>
+    <th>Date</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="review : ${filteredReviews}">
+    <td th:text="${review.reviewId}"></td>
+    <td th:text="${review.reviewText}"></td>
+    <td th:text="${review.rating}"></td>
+    <td th:text="${review.reviewCreatedOnDate}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
